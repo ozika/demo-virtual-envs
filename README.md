@@ -1,4 +1,4 @@
-# This is a quick demo on how to set up and share virtual environments in Pyhon and R 
+# This is a quick demo on how to set up and share virtual environments in Python and R 
 
 ## Python using conda
 Install `anaconda`/`miniconda` on your computer: https://www.anaconda.com/
@@ -107,7 +107,46 @@ pip install -r requirements.txt
 
 ```
 
-Enjoy! 
+
+### R 
+
+To share computational environments in R, we will be using `renv`. Comprehensive description here: https://rstudio.github.io/renv/articles/renv.html
+
+If you don't have it, install `renv` and `here` packages. 
+
+```r
+install.packages("renv", "here")
+```
+**Create renv** 
+
+Go to the folder in which you want to create `renv`. I recommend using `here::here()` to check, and if necessary to use `here::i_am(".root_file")` (where `.root_file` is a hidden file located in the project root). 
+
+Initialize the environment
+
+```r
+renv::init()
+```
+This creates a `renv.lock` file containing the necessary packages and their dependencies (it's recommended to only interact with this file using `renv`, manual changes can break things). 
+
+You can install the necesssary packages using `renv::install()` or 'install.packages()`
+
+To create a snapshot of the state of the env use, this will update the `renv.lock` file. 
+
+```r
+renv::snapshot()
+```
+One can now commit the `renv.lock` file. 
+
+**Restoring environment**
+
+Go to the folder containing `renv.lock` and simply restore the environment 
+
+```r
+renv::restore() 
+```
+Example Rmd script using renv: https://github.com/ozika/trait-anxiety-and-state-inference-zika2022/blob/master/scripts/stats_main.Rmd
+
+
 
 
 
